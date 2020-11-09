@@ -5,4 +5,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TeachMeSkills.Group4.UI\TeachMeSkills.Group4.Core.csproj" />
+  </ItemGroup>
+
 </Project>
