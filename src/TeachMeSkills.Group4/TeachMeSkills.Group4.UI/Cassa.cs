@@ -23,7 +23,7 @@ namespace TeachMeSkills.Group4.Core
             }
             Last(cassa);
         }
-    public static void Last(Cassa cassa)
+        public static void Last(Cassa cassa)
     {
         cassa.Queue.Dequeue();
         Console.WriteLine(cassa.Queue.Count);

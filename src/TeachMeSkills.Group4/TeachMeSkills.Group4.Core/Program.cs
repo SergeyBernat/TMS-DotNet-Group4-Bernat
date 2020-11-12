@@ -11,6 +11,7 @@ namespace TeachMeSkills.Group4.UI
             List<Purchaser> purchasers = Purchaser.GetPurchaserRND();
             Cassa cassa = new Cassa { };
             Cassa.GetPurchaserByGegericList(purchasers, cassa);
+            ReceiptOfPayment.BasketProd(purchasers);
         }
     }
 }
