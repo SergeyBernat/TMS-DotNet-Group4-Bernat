@@ -30,7 +30,15 @@ namespace TeachMeSkills.Group4.Core
         }
         public static void Run()
         {
-            string writePath = @"C:\Users\vinex\source\repos\TMS-DotNet-Group4-Bernat\Cashbox_3.txt";
+            string path = @"C:\TMS-DotNet-Group4-Bernat";
+            string subpath = @"checks";
+            DirectoryInfo dirInfo = new DirectoryInfo(path);
+            if (!dirInfo.Exists)
+            {
+                dirInfo.Create();
+            }
+            dirInfo.CreateSubdirectory(subpath);
+            string writePath = @"C:\TMS-DotNet-Group4-Bernat\checks\Cashbox_3.txt";
             string text = "C̲h̲e̲c̲k̲ C̲a̲s̲h̲b̲o̲x̲ 3:\n";
             using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.Default))
             {
@@ -73,7 +81,7 @@ namespace TeachMeSkills.Group4.Core
         }
         public static void OutputToTxt(object purchaserBacketByThread)
         {
-            string writePath = @"C:\Users\vinex\source\repos\TMS-DotNet-Group4-Bernat\Cashbox_3.txt";
+            string writePath = @"C:\TMS-DotNet-Group4-Bernat\checks\Cashbox_3.txt";
             List<Purchaser> currentBacketBPurchaser = new List<Purchaser>();
             var current = (Purchaser)purchaserBacketByThread;
             currentBacketBPurchaser.Add(current);
