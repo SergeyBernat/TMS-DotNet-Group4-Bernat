@@ -6,8 +6,7 @@ namespace TeachMeSkills.Group4.Core
     public class Product
     {
         public string Name { get; set; } = GetProductName();
-        public decimal Price { get; set; } = GetProductPrice();
-        public int TicksStop { get; set; } = GetClass1Ticks();
+        public int Price { get; set; } = GetProductPrice();
         public static string GetProductName()
         {
             Random rnd = new Random();
@@ -31,21 +30,14 @@ namespace TeachMeSkills.Group4.Core
             string name = ProductName[Index];
             return name;
         }
-        public static decimal GetProductPrice()
+        public static int GetProductPrice()
         {
             Random rnd = new Random();
             return rnd.Next(1, 100);
         }
-        public static int GetClass1Ticks()
-        {
-            Random rnd = new Random();
-            return rnd.Next(1000, 5000);
-        }
-
         public static List<Product> GetRNDProduct()
         {
             Random rnd = new Random();
-
             List<Product> class1List = new List<Product>();
             int productsCount = rnd.Next(1, 11);
             for (int i = 0; i < productsCount; i++)

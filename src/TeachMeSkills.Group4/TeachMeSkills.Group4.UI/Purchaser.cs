@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 
 namespace TeachMeSkills.Group4.Core
@@ -8,6 +7,7 @@ namespace TeachMeSkills.Group4.Core
     public class Purchaser
     {
         public Thread purchaserThread;
+        public string CurrentCashbox { get; set; }
         public string Name { get; set; }
         public decimal Cash { get; set; }
         public List<Product> basket { get; set; } = Product.GetRNDProduct();
@@ -25,13 +25,13 @@ namespace TeachMeSkills.Group4.Core
                 "Isabella" , "James", "Charlotte", "Benjamin",
                 "Amelia", "Lucas", "Mia", "Abigail", "Ada",
                 "Adelina", "Agatha", "Alexa", "Bailey",
-                "Barbara", "Beatrice", "Cameron", "Carl", "Carlos", 
-                "Charles","Christopher", "Daniel", "David", "Dennis", 
-                "Devin", "Diego","Harold", "Harry", "Hayden", "Henry", 
-                "Jack", "Jackson", "Jacob","Jaden", "Jake", "Katelyn", 
+                "Barbara", "Beatrice", "Cameron", "Carl", "Carlos",
+                "Charles","Christopher", "Daniel", "David", "Dennis",
+                "Devin", "Diego","Harold", "Harry", "Hayden", "Henry",
+                "Jack", "Jackson", "Jacob","Jaden", "Jake", "Katelyn",
                 "Katherine", "Kathryn", "Kayla","Laura", "Lauren", "Leah",
-                "Leonora", "Leslie", "Nancy", "Natalie","Nicole", "Nora", 
-                "Patricia", "Pauline", "Penelope", "Priscilla","Ralph", 
+                "Leonora", "Leslie", "Nancy", "Natalie","Nicole", "Nora",
+                "Patricia", "Pauline", "Penelope", "Priscilla","Ralph",
                 "Raymond", "Reginald", "Rita", "Rosaline", "Rose", "Simon",
                 "Stanley", "Steven", "Vanessa", "Victoria", "Wallace", "Walter"};
             int Index = rnd.Next(Names.Length);
