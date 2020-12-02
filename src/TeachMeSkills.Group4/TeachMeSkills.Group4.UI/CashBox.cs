@@ -44,7 +44,7 @@ namespace TeachMeSkills.Group4.Core
                             sdf.Add(list.First());
                             list.Remove(list.First());
                             Thread.Sleep(10);
-                            
+
                         }
                     }
                     catch (System.InvalidOperationException)
@@ -95,21 +95,24 @@ namespace TeachMeSkills.Group4.Core
         {
             if (Thread.CurrentThread.Name == "Thread")
             {
+                Thread.Sleep(1000);
                 Semaphore.Wait();
-                if (Semaphore.CurrentCount != 0)
+                lock (locker)
                 {
-                    lock (locker)
+                    if (Semaphore.CurrentCount != 0)
                     {
-                        //Console.WriteLine("зашел");
+
+                        Console.WriteLine("зашел");
                         OutputToTxt(purchaserBacketByThread);
+
+                        Semaphore.Release();
+                        Thread.CurrentThread.Interrupt();
                     }
-                    Semaphore.Release();
-                    Thread.CurrentThread.Interrupt();
-                }
-                else
-                {
-                    //Console.WriteLine("уходит");
-                    Semaphore.Release();
+                    else
+                    {
+                        Console.WriteLine("уходит");
+                        Semaphore.Release();
+                    }
                 }
             }
         }
@@ -125,20 +128,23 @@ namespace TeachMeSkills.Group4.Core
                 buyerName = item.Name;
                 var a = item.basket;
                 List<decimal> Sum = new List<decimal>();
-                using (StreamWriter sw = new StreamWriter(writePath, true, System.Text.Encoding.Default))
+                lock (locker)
                 {
-                    sw.WriteLine($"Check [{buyerName}]");
-                    foreach (var value in a)
+                    using (StreamWriter sw = new StreamWriter(writePath, true, System.Text.Encoding.Default))
                     {
-                        string textName;
-                        string textPrice;
-                        textName = value.Name;
-                        textPrice = value.Price.ToString();
-                        Sum.Add(value.Price);
-                        sw.WriteLine($"{textName} - {textPrice}$");
+                        sw.WriteLine($"Check [{buyerName}]");
+                        foreach (var value in a)
+                        {
+                            string textName;
+                            string textPrice;
+                            textName = value.Name;
+                            textPrice = value.Price.ToString();
+                            Sum.Add(value.Price);
+                            sw.WriteLine($"{textName} - {textPrice}$");
+                        }
+                        sw.WriteLine($"G̲e̲n̲e̲r̲a̲l̲ s̲u̲m̲: {Sum.Sum()}$");
+                        sw.WriteLine("");
                     }
-                    sw.WriteLine($"G̲e̲n̲e̲r̲a̲l̲ s̲u̲m̲: {Sum.Sum()}$");
-                    sw.WriteLine("");
                 }
             }
         }
