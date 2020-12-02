@@ -14,6 +14,7 @@ namespace TeachMeSkills.Group4.UI
             Console.WriteLine("Enter total number of buyer:");
             var userInputbuyer = int.Parse(Console.ReadLine());
             purchasers = CashBox.GetPurchaserRND(purchasers,userInputbuyer);
+            Console.WriteLine("Path to reports: C:/TMS-DotNet-Group4-Bernat");
             string path = @"C:\TMS-DotNet-Group4-Bernat";
             string subpath = @$"checks_{DateTime.Now.ToShortDateString()}";
             DirectoryInfo dirInfo = new DirectoryInfo(path);
