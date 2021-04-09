@@ -8,9 +8,9 @@ namespace TeachMeSkills.Group4.Core
 {
     public class CashBox
     {
-        List<Purchaser> list = new List<Purchaser>();
-        static Guid guid = Guid.NewGuid();
-        static object locker = new object();
+        private List<Purchaser> list = new List<Purchaser>();
+        private static Guid guid = Guid.NewGuid();
+        private static object locker = new object();
         public static SemaphoreSlim Semaphore { get; set; } = new SemaphoreSlim(6, 6);
         public string cashboxNumber { get; set; }
         public List<Purchaser> cashboxPurchasers { get; set; }
@@ -27,6 +27,7 @@ namespace TeachMeSkills.Group4.Core
             }
             return purchasers;
         }
+
         public static List<Purchaser> GetPurchasersForCashbox(object purchasers)
         {
             List<Purchaser> list = new List<Purchaser>();
@@ -34,7 +35,6 @@ namespace TeachMeSkills.Group4.Core
             var sdf = new List<Purchaser>();
             while (list.Count > 0)
             {
-
                 if (list.Count != 0)
                 {
                     try
@@ -44,12 +44,10 @@ namespace TeachMeSkills.Group4.Core
                             sdf.Add(list.First());
                             list.Remove(list.First());
                             Thread.Sleep(10);
-
                         }
                     }
                     catch (System.InvalidOperationException)
                     {
-
                         break;
                     }
                 }
@@ -60,6 +58,7 @@ namespace TeachMeSkills.Group4.Core
             }
             return sdf;
         }
+
         public static void Run(object purchasers)
         {
             CashBox cashBox = new CashBox
@@ -80,6 +79,7 @@ namespace TeachMeSkills.Group4.Core
             using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.Default)) { sw.WriteLine(text); }
             PurchasersThreadStart(cashBox);
         }
+
         public static void PurchasersThreadStart(CashBox cashBox)
         {
             while (cashBox.cashboxPurchasers.Count != 0)
@@ -91,6 +91,7 @@ namespace TeachMeSkills.Group4.Core
                 cashBox.cashboxPurchasers.Remove(purchaser);
             }
         }
+
         public static void Queue(object purchaserBacketByThread)
         {
             if (Thread.CurrentThread.Name == "Thread")
@@ -101,8 +102,7 @@ namespace TeachMeSkills.Group4.Core
                 {
                     if (Semaphore.CurrentCount != 0)
                     {
-
-                        Console.WriteLine("зашел");
+                        Console.WriteLine("Enter");
                         OutputToTxt(purchaserBacketByThread);
 
                         Semaphore.Release();
@@ -110,12 +110,13 @@ namespace TeachMeSkills.Group4.Core
                     }
                     else
                     {
-                        Console.WriteLine("уходит");
+                        Console.WriteLine("Exit");
                         Semaphore.Release();
                     }
                 }
             }
         }
+
         public static void OutputToTxt(object purchaserBacketByThread)
         {
             List<Purchaser> currentBacketBPurchaser = new List<Purchaser>();

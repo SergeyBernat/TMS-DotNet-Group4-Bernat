@@ -7,6 +7,7 @@ namespace TeachMeSkills.Group4.Core
     {
         public string Name { get; set; } = GetProductName();
         public int Price { get; set; } = GetProductPrice();
+
         public static string GetProductName()
         {
             Random rnd = new Random();
@@ -30,11 +31,13 @@ namespace TeachMeSkills.Group4.Core
             string name = ProductName[Index];
             return name;
         }
+
         public static int GetProductPrice()
         {
             Random rnd = new Random();
             return rnd.Next(1, 100);
         }
+
         public static List<Product> GetRNDProduct()
         {
             Random rnd = new Random();

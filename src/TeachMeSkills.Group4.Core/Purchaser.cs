@@ -11,12 +11,14 @@ namespace TeachMeSkills.Group4.Core
         public string Name { get; set; }
         public decimal Cash { get; set; }
         public List<Product> basket { get; set; } = Product.GetRNDProduct();
+
         public Purchaser()
         {
             basket = basket;
             Name = GetPurchaserName();
             Cash = GetPurchaserCash();
         }
+
         private static string GetPurchaserName()
         {
             Random rnd = new Random();
@@ -38,6 +40,7 @@ namespace TeachMeSkills.Group4.Core
             string name = Names[Index];
             return name;
         }
+
         private static decimal GetPurchaserCash()
         {
             Random rnd = new Random();
@@ -45,4 +48,3 @@ namespace TeachMeSkills.Group4.Core
         }
     }
 }
-
